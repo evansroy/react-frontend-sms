@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
+import StudentService from '../services/StudentService'
 
 class ListStudentComponent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      students: []
+        students: []
     }
+  }
+
+  componentDidMount() {
+    StudentService.getStudents().then((res) => {
+      this.setState({students: res.data});
+    });
   }
   render() {
     return (
@@ -33,8 +40,8 @@ class ListStudentComponent extends Component {
                       <td> {student.firstName} </td>
                       <td> {student.lastName} </td>
                       <td> {student.emailId} </td>
-                      <td> {student.phone_number} </td>
-                      <td> {student.date_of_birth} </td>
+                      <td> {student.phoneNumber} </td>
+                      <td> {student.dateOfBirth} </td>
                   </tr>
                 )
               }
